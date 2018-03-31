@@ -1,0 +1,26 @@
+db包         负责储存数据库模型相关的代码
+gson包       负责存放GSON模型相关数据
+service包    负责存放服务相关代码
+util包       负责存放工具相关的代码
+
+依赖库：
+    LitePal用于对数据库进行操作  compile 'org.litepal.android:core:1.4.1'
+    OkHttp 用于进行网络请求      compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    GSON用于JSON的数据解析       compile 'com.google.code.gson:gson:2.7'
+    Glide 用于加载和展示图片     compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    LitePal：
+    添加依赖之后  第一步是搭建数据库，对应 省province 市city 区country 三个类
+    写完之后 在main文件夹中添加一个包assets litepal.xml文件将这三个实体类添加到 映射列表中
+    然后Androidmanifest中设置   android:name="org.litepal.LitePalApplication"
+    这样数据库和表会在首次执行任意数据库操作时自动创建
+
+
+    设置网络操作
+    接下来 遍历全国的省市县  这里在util包下 增加个HttpUtil类 okhhtp请求数据并且设置回调
+    然后创建utility类  解析和处理服务器返回的 省市县数据
+    接下来 为了复用这个省市县的数据  决定用碎片写选择省市县界面----------choose_area.xml布局文件
+    然后做一个fragment 用于编写省市县的数据了-------------------Choose-AreaFragmetn
+
+
+    之后 用一个碎片去 装一个 list控件 选择省市区 默认选择 查询省  然后修改当前选择地的标签  对应去筛选对应的查询代码块
