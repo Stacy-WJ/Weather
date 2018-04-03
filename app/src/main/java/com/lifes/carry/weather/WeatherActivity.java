@@ -1,6 +1,8 @@
 package com.lifes.carry.weather;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -53,6 +55,14 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT>=21){
+            View decorView = getWindow().getDecorView();
+//            表示拿到当前活动的DecorView   下面表示活动的布局显示在状态栏的上面
+            decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+
+        }
         setContentView(R.layout.activity_weather);
 //
         weatherLayout = (ScrollView) findViewById(R.id.weather_parent);
