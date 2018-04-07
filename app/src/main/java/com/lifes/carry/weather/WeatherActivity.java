@@ -1,5 +1,6 @@
 package com.lifes.carry.weather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -31,6 +32,7 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import service.AutoUpdateService;
 
 /**
  * @author Administrator
@@ -96,6 +98,8 @@ public class WeatherActivity extends AppCompatActivity {
             Weather weather = Utility.handleWeatherResponse(weatherString);
             mWeatherId = weather.basic.weatherId;
             showWeatherInfo(weather);
+            Intent intent = new Intent(this, AutoUpdateService.class);
+            startService(intent);
         }else{
 //            无缓存时去服务器查询天气
             mWeatherId = getIntent().getStringExtra("weather_id");
@@ -235,6 +239,7 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+
     }
 
 }
